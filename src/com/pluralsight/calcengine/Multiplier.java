@@ -13,7 +13,7 @@ public class Multiplier extends CalculateBase {
     @Override
     // Method
     public void calculate() {
-        double value = getLeftVal() + getRightVal();
+        double value = getLeftVal() * getRightVal();
         setResult(value);
     }
 
