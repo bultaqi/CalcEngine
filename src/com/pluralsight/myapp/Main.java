@@ -9,6 +9,7 @@ import com.pluralsight.calcengine.InvalidStatementException;
 import com.pluralsight.calcengine.MathEquation;
 import com.pluralsight.calcengine.MathProcessing;
 import com.pluralsight.calcengine.Multiplier;
+import com.pluralsight.calcengine.PowerOf;
 import com.pluralsight.calcengine.Subtractor;
 
 // DON'T FORGET after changing the imports and packages you MUST edit the configurations in the run tool
@@ -20,12 +21,17 @@ public class Main {
         // useCalculatorBase();
         // useCalculateHelper();
 
+        // the power of interfaces is the ability to take a problem, abstractly model it into its ind. pieces
+        // model the contract to fulfill those pieces as an interface
+        // and then very easily build implementations of the interface that focus on a very specific set of work
         String[] statements = {
-                "add 25.0 92.0"
+                "add 25.0 92.0",
+                "power 5.0 2.0"
         };
 
         DynamicHelper helper = new DynamicHelper(new MathProcessing[] {
-            new Adder()
+                new Adder(),
+                new PowerOf()
         });
         for(String statement:statements) {
             String output = helper.process(statement);
