@@ -9,6 +9,9 @@ public class Main {
         // useCalculatorBase();
 
         String[] statements = {
+            "add 1.0",              // incorrect number of values
+            "add xx 25.0",          // non-numeric data
+            "addx 0.0 0.0",         // invalid command
             "divide 100.0 50.0",
             "add 25.0 92.0",
             "subtract 225.0 17.0",
@@ -16,9 +19,19 @@ public class Main {
         };
 
         CalculateHelper helper = new CalculateHelper();
+        // notice we placed the try/catch inside the for because if it notcied any error, it would jump out
         for (String statement:statements) {
-            helper.process(statement);
-            System.out.println(helper);
+            // the method, process, declares that we throw the customer exception, so we wrap it in a try/catch
+            try {
+                helper.process(statement);
+                System.out.println(helper);
+            } catch (InvalidStatementException e) {
+                System.out.println(e.getMessage());
+                // in some cases, we'll have not only our custom exception, but another exception
+                if(e.getCause() != null)
+                    System.out.println(" Original exception: " + e.getCause().getMessage());
+            }
+
         }
 
     }

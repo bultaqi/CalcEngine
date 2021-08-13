@@ -11,18 +11,28 @@ public class CalculateHelper {
     double rightValue;
     double result;
 
-    public void process(String statement) {
+    // remember custom exceptions are checked exceptions
+    // there are two ways for a method to handle a checked exception
+    // either try a try/catch block to handle it or throw it to the caller of the method(which we did)
+    public void process(String statement) throws InvalidStatementException {
         //process is taking those strings and separating them mores specifically
         String[] parts = statement.split(" ");
+        if(parts.length != 3)
+            throw new InvalidStatementException("Incorrect number of fields", statement);
         // are math operation, commandString, is a string and we still have to convert it to the Enumeration(MathCommand)
         String commandString = parts[0]; // like "add"
         // capital Double.parseDouble is converting the string, parts, into the primitive type double
-        leftValue = Double.parseDouble(parts[1]); // like "1.0"
-        rightValue = Double.parseDouble(parts[2]); // like "2.0"
 
+        try {
+            leftValue = Double.parseDouble(parts[1]); // like "1.0"
+            rightValue = Double.parseDouble(parts[2]); // like "2.0"
+        } catch (NumberFormatException e) {
+            throw new InvalidStatementException("Non-numeric data", statement, e);
+        }
         //translate the string command into our math enumeration
         setCommandFromString(commandString);
-
+        if(command == null)
+            throw new InvalidStatementException("Invalid command", statement);
         // command is looked at and creates a calculate based derived class to do the work
         CalculateBase calculator = null;
         switch (command) {
