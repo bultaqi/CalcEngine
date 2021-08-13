@@ -6,10 +6,10 @@ public class CalculateHelper {
     private static final char MULTIPLY_SYMBOL = '*';
     private static final char DIVIDE_SYMBOL = '/';
     //fields for the values being passed in as strings in main
-    MathCommand command;
-    double leftValue;
-    double rightValue;
-    double result;
+    private MathCommand command;
+    private double leftValue;
+    private double rightValue;
+    private double result;
 
     // remember custom exceptions are checked exceptions
     // there are two ways for a method to handle a checked exception

@@ -1,6 +1,15 @@
-package com.pluralsight.calcengine;
+package com.pluralsight.myapp;
 
-// import java.nio.file.FileSystemNotFoundException;
+import com.pluralsight.calcengine.Adder;
+import com.pluralsight.calcengine.CalculateBase;
+import com.pluralsight.calcengine.CalculateHelper;
+import com.pluralsight.calcengine.Divider;
+import com.pluralsight.calcengine.InvalidStatementException;
+import com.pluralsight.calcengine.MathEquation;
+import com.pluralsight.calcengine.Multiplier;
+import com.pluralsight.calcengine.Subtractor;
+
+// DONT FORGET after changing the imports and packages you MUST edit the configurations in the run tool
 
 public class Main {
 
@@ -19,7 +28,7 @@ public class Main {
         };
 
         CalculateHelper helper = new CalculateHelper();
-        // notice we placed the try/catch inside the for because if it notcied any error, it would jump out
+        // notice we placed the try/catch inside the for because if it noticed any error, it would jump out
         for (String statement:statements) {
             // the method, process, declares that we throw the customer exception, so we wrap it in a try/catch
             try {
