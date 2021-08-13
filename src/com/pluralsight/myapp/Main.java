@@ -4,19 +4,36 @@ import com.pluralsight.calcengine.Adder;
 import com.pluralsight.calcengine.CalculateBase;
 import com.pluralsight.calcengine.CalculateHelper;
 import com.pluralsight.calcengine.Divider;
+import com.pluralsight.calcengine.DynamicHelper;
 import com.pluralsight.calcengine.InvalidStatementException;
 import com.pluralsight.calcengine.MathEquation;
+import com.pluralsight.calcengine.MathProcessing;
 import com.pluralsight.calcengine.Multiplier;
 import com.pluralsight.calcengine.Subtractor;
 
-// DONT FORGET after changing the imports and packages you MUST edit the configurations in the run tool
+// DON'T FORGET after changing the imports and packages you MUST edit the configurations in the run tool
 
 public class Main {
 
     public static void main(String[] args) {
         // useMathEquation();
         // useCalculatorBase();
+        // useCalculateHelper();
 
+        String[] statements = {
+                "add 25.0 92.0"
+        };
+
+        DynamicHelper helper = new DynamicHelper(new MathProcessing[] {
+            new Adder()
+        });
+        for(String statement:statements) {
+            String output = helper.process(statement);
+            System.out.println(output);
+        }
+    }
+
+    static void useCalculateHelper() {
         String[] statements = {
             "add 1.0",              // incorrect number of values
             "add xx 25.0",          // non-numeric data
@@ -29,7 +46,7 @@ public class Main {
 
         CalculateHelper helper = new CalculateHelper();
         // notice we placed the try/catch inside the for because if it noticed any error, it would jump out
-        for (String statement:statements) {
+        for (String statement : statements) {
             // the method, process, declares that we throw the customer exception, so we wrap it in a try/catch
             try {
                 helper.process(statement);
@@ -37,7 +54,7 @@ public class Main {
             } catch (InvalidStatementException e) {
                 System.out.println(e.getMessage());
                 // in some cases, we'll have not only our custom exception, but another exception
-                if(e.getCause() != null)
+                if (e.getCause() != null)
                     System.out.println(" Original exception: " + e.getCause().getMessage());
             }
 
@@ -45,7 +62,7 @@ public class Main {
 
     }
 
-        static void useMathEquation() {
+    static void useMathEquation() {
         MathEquation[] equations = new MathEquation[4];
         equations[0] = new MathEquation('d',100.0d,50.0d);
         equations[1] = new MathEquation('a', 25.0d, 92.0d);
